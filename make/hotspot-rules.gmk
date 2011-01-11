@@ -65,6 +65,9 @@ hotspot-sanity::
 #
 
 HOTSPOT_TARGET = all_product
+ifeq ($(PLATFORM), macosx)
+  HOTSPOT_TARGET = universal_product
+endif
 ifeq ($(DEBUG_NAME), debug)
   HOTSPOT_TARGET = all_debug
 endif
