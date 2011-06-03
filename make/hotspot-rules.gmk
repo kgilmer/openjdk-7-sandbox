@@ -66,13 +66,27 @@ hotspot-sanity::
 
 HOTSPOT_TARGET = all_product
 ifeq ($(PLATFORM), macosx)
+ifeq ($(ARCH), universal)
   HOTSPOT_TARGET = universal_product
 endif
+endif
+
 ifeq ($(DEBUG_NAME), debug)
   HOTSPOT_TARGET = all_debug
+ifeq ($(PLATFORM), macosx)
+ifeq ($(ARCH), universal)
+  HOTSPOT_TARGET = universal_debug
 endif
+endif
+endif
+
 ifeq ($(DEBUG_NAME), fastdebug)
   HOTSPOT_TARGET = all_fastdebug
+ifeq ($(PLATFORM), macosx)
+ifeq ($(ARCH), universal)
+  HOTSPOT_TARGET = universal_fastdebug
+endif
+endif
 endif
 
 ifeq ($(ZERO_BUILD), true)
