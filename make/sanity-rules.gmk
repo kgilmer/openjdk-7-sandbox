@@ -41,6 +41,10 @@ ifeq ($(BUILD_JDK), true)
   sanity:: jdk-sanity 
 endif
 
+ifeq ($(BUILD_MERMAID), true)
+  sanity:: mermaid-sanity 
+endif
+
 # Only need these sanity rules when not doing a debug build
 ifeq ($(DEBUG_NAME),)
 
@@ -67,7 +71,7 @@ purge-sanity: $(ERROR_FILE) $(WARNING_FILE) $(MESSAGE_FILE)
 pre-sanity: purge-sanity 
 
 # this should be the last rule in any target's sanity rule.
-post-sanity post-sanity-hotspot post-sanity-jdk post-sanity-install post-sanity-deploy:
+post-sanity post-sanity-hotspot post-sanity-jdk post-sanity-mermaid post-sanity-install post-sanity-deploy:
 	@if [ -r $(MESSAGE_FILE) ]; then \
 	  $(ECHO) "" ; \
 	  $(CAT) $(MESSAGE_FILE) ; \
@@ -348,6 +352,6 @@ endif
 	@$(ECHO) "" >> $(MESSAGE_FILE)
 
 .PHONY: sanity settings pre-sanity insane \
-	post-sanity post-sanity-hotspot post-sanity-jdk \
+	post-sanity post-sanity-hotspot post-sanity-jdk  post-sanity-mermaid\
 	post-sanity-install post-sanity-deploy \
 	alt_bootdir bootdir environment

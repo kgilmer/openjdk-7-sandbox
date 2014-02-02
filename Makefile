@@ -48,10 +48,20 @@ JDK_IMAGE_DIRNAME = j2sdk-image
 JDK_IMAGE_DIR     = $(OUTPUTDIR)/$(JDK_IMAGE_DIRNAME)
 ABS_JDK_IMAGE_DIR = $(ABS_OUTPUTDIR)/$(JDK_IMAGE_DIRNAME)
 
+# The created mermaid image directory
+MERMAID_IMAGE_DIRNAME = mermaid-image
+MERMAID_IMAGE_DIR     = $(OUTPUTDIR)/$(MERMAID_IMAGE_DIRNAME)
+ABS_JDK_IMAGE_DIR = $(ABS_OUTPUTDIR)/$(MERMAID_IMAGE_DIRNAME)
+
 # Relative path from an output directory to the image directory
 REL_JDK_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-$(DEBUG_NAME))/$(JDK_IMAGE_DIRNAME)
 REL_JDK_DEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-debug)/$(JDK_IMAGE_DIRNAME)
 REL_JDK_FASTDEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-fastdebug)/$(JDK_IMAGE_DIRNAME)
+
+# Relative path from an output directory to the image directory
+REL_MERMAID_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-$(DEBUG_NAME))/$(MERMAID_IMAGE_DIRNAME)
+REL_MERMAID_DEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-debug)/$(MERMAID_IMAGE_DIRNAME)
+REL_MERMAID_FASTDEBUG_IMAGE_DIR = ../$(OUTPUTDIR_BASENAME-fastdebug)/$(MERMAID_IMAGE_DIRNAME)
 
 ifndef TOPDIR
   TOPDIR:=.
@@ -62,6 +72,13 @@ ifndef JDK_TOPDIR
 endif
 ifndef JDK_MAKE_SHARED_DIR
   JDK_MAKE_SHARED_DIR=$(JDK_TOPDIR)/make/common/shared
+endif
+
+ifndef MERMAID_TOPDIR
+  MERMAID_TOPDIR=$(TOPDIR)/mermaid
+endif
+ifndef MERMAID_MAKE_SHARED_DIR
+  MERMAID_MAKE_SHARED_DIR=$(MERMAID_TOPDIR)/make/common/shared
 endif
 
 default: all
@@ -75,6 +92,7 @@ include ./make/corba-rules.gmk
 include ./make/jaxp-rules.gmk
 include ./make/jaxws-rules.gmk
 include ./make/jdk-rules.gmk
+include ./make/mermaid-rules.gmk
 include ./make/install-rules.gmk
 include ./make/sponsors-rules.gmk
 include ./make/deploy-rules.gmk
@@ -157,6 +175,11 @@ endif
 ifeq ($(BUILD_JDK), true)
   generic_build_repo_series:: $(JDK_JAVA_EXE)
   clobber:: jdk-clobber
+endif
+
+ifeq ($(BUILD_MERMAID), true)
+  generic_build_repo_series:: $(MERMAID_JAVA_EXE)
+  clobber:: mermaid-clobber
 endif
 
 ifeq ($(BUILD_DEPLOY), true)
