@@ -31,3 +31,4 @@ sh ./make/scripts/hgforest.sh clone
 # Update all existing repositories to the latest sources
 sh ./make/scripts/hgforest.sh pull -u
 
+git clone git@github.com:kgilmer/openjdk-7-mermaid.git
