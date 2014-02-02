@@ -91,8 +91,8 @@ include ./make/langtools-rules.gmk
 include ./make/corba-rules.gmk
 include ./make/jaxp-rules.gmk
 include ./make/jaxws-rules.gmk
-include ./make/jdk-rules.gmk
 include ./make/mermaid-rules.gmk
+#include ./make/jdk-rules.gmk
 include ./make/install-rules.gmk
 include ./make/sponsors-rules.gmk
 include ./make/deploy-rules.gmk
